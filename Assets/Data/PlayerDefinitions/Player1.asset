@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player1
   m_EditorClassIdentifier: 
   <MinSpeed>k__BackingField: 2
-  <MaxSpeed>k__BackingField: 5
+  <MaxSpeed>k__BackingField: 7
   <MinAgility>k__BackingField: 1
   <MaxAgility>k__BackingField: 10
   <MinStrength>k__BackingField: 1

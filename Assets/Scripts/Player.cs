@@ -19,6 +19,6 @@ public class Player : MonoBehaviour
         Speed = Random.Range(definition.MinSpeed, definition.MaxSpeed);
         Agility = Random.Range(definition.MinAgility, definition.MaxAgility);
         Strength = Random.Range(definition.MinStrength, definition.MaxStrength);
-        Debug.Log("Speed: " + Speed + ", agility: " + Agility + ", strength: " + Strength);
+        Debug.Log($"{name} stats: speed: {Speed}, agility: {Agility}, strength: {Strength}");
     }
 }  

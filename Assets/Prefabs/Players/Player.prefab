@@ -160,3 +160,4 @@ MonoBehaviour:
   cam: {fileID: 0}
   agent: {fileID: -1011954661623463989}
   player: {fileID: -6115865080134865255}
+  playerDistance: 1

@@ -5,20 +5,20 @@ public class InputManager
 {
     public static InputManager Instance => instance ?? new InputManager();
 
-    private static InputManager instance = null;
+    private static InputManager instance;
 
     public event Action OnMouseClickInput;
 
-    private readonly InputActions playerInputs = null;
+    private readonly InputActions playerInputs;
 
 
-    public InputManager()
+    private InputManager()
     {
         Assert.IsNull(instance);
         instance = this;
         playerInputs = new InputActions();
 
-        playerInputs.Gameplay.MouseClick.performed += (ctx) => OnMouseClickInput?.Invoke();
+        playerInputs.Gameplay.MouseClick.performed += (_) => OnMouseClickInput?.Invoke();
 
         EnableInput();
     }

@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Player player;
+    [SerializeField] private float playerDistance;
     
 
     private void Awake()
@@ -28,10 +28,9 @@ public class PlayerController : MonoBehaviour
     {
         if (player.IsGuide)
         {
-            Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
+            var ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out var hit))
             {
                 agent.SetDestination(hit.point);
             }
@@ -44,17 +43,24 @@ public class PlayerController : MonoBehaviour
 
     private void FollowGuide()
     {
-        if (!player.IsGuide)
+        if (player.IsGuide) 
+            return;
+        
+        Player guidePlayer = null;
+        
+        foreach (var otherPlayer in GameplayManager.Instance.Players)
         {
-            Player guidePlayer = null;
-            foreach (var player in GameplayManager.Instance.Players)
-            {
-                if (player.IsGuide)
-                    guidePlayer = player;
-            }
-
-            if(guidePlayer != null)
-                agent.SetDestination(guidePlayer.transform.position);
+            if (!otherPlayer.IsGuide) 
+                continue;
+            
+            guidePlayer = otherPlayer;
+            break;
         }
+
+        if (guidePlayer == null) 
+            return;
+        
+        var guidePosition = guidePlayer.transform.position;
+        agent.SetDestination(guidePosition + (player.transform.position - guidePosition).normalized * playerDistance);
     }
 }
