@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     
     [SerializeField] private PlayerDefinition definition;
     
-    private void Start()
+    private void Awake()
     {
         SetRandomValues();
     }
